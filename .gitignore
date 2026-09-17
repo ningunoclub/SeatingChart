@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Swift Package Manager build artifacts
+.build/
+.swiftpm/
+
+# Xcode
+*.xcodeproj
+*.xcworkspace
+DerivedData/
+*.xcuserstate
+
+# Generated app bundle
+*.app
+
+# Local/private user data created by the app
+*.seatingchart
+
+# Local agent settings
+.claude/
