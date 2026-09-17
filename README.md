@@ -17,7 +17,11 @@ The UI is available in English and German and follows the system language automa
 
 ## Download
 
-The easiest way to install SeatingChart is from the [latest GitHub release](https://github.com/ningunoclub/SeatingChart/releases/latest):
+The easiest way to install SeatingChart is through the project website, which always links to the latest release:
+
+**https://ningunoclub.github.io/SeatingChart/**
+
+Or download directly from the [latest GitHub release](https://github.com/ningunoclub/SeatingChart/releases/latest):
 
 1. Download the release zip (for example `SeatingChart.zip`).
 2. Double-click the zip to extract `Seating Chart.app`.

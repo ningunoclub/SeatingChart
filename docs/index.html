@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SeatingChart — Download</title>
+  <title>SeatingChart — Free macOS seating chart generator</title>
+  <meta name="description" content="A lightweight, fully offline macOS app for generating random seating charts for school classes.">
   <style>
     :root {
       --bg: #f5f7fa;
@@ -12,7 +13,9 @@
       --muted: #6b7280;
       --accent: #2563eb;
       --accent-hover: #1d4ed8;
+      --accent-soft: #eff6ff;
       --danger: #dc2626;
+      --border: #e5e7eb;
       --radius: 16px;
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
@@ -21,54 +24,57 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 20px;
     }
 
     .card {
-      width: 100%;
-      max-width: 520px;
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 40px 32px;
+      padding: 48px 36px;
       text-align: center;
     }
 
-    .icon {
-      width: 88px;
-      height: 88px;
+    .logo {
+      width: 120px;
+      height: 120px;
       margin: 0 auto 20px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 40px;
-      font-weight: 700;
-      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+      border-radius: 26px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
 
     h1 {
       margin: 0 0 8px;
-      font-size: 2rem;
+      font-size: 2.25rem;
       letter-spacing: -0.02em;
     }
 
     .tagline {
-      margin: 0 0 28px;
+      margin: 0 auto 32px;
+      max-width: 480px;
       color: var(--muted);
-      font-size: 1.05rem;
+      font-size: 1.1rem;
     }
 
     .btn {
@@ -102,13 +108,14 @@
     }
 
     .meta {
-      margin-top: 28px;
+      margin: 28px auto 0;
       padding-top: 24px;
-      border-top: 1px solid #e5e7eb;
+      border-top: 1px solid var(--border);
       display: grid;
-      gap: 12px;
+      gap: 10px;
       text-align: left;
       font-size: 0.95rem;
+      max-width: 420px;
     }
 
     .meta-row {
@@ -129,7 +136,7 @@
     }
 
     .releases-link {
-      margin-top: 24px;
+      margin-top: 20px;
       display: inline-block;
       color: var(--accent);
       text-decoration: none;
@@ -141,8 +148,9 @@
     }
 
     .error {
-      margin-top: 24px;
-      padding: 16px;
+      margin: 24px auto 0;
+      max-width: 420px;
+      padding: 14px;
       border-radius: 10px;
       background: #fef2f2;
       color: var(--danger);
@@ -162,13 +170,103 @@
       to { transform: rotate(360deg); }
     }
 
-    @media (max-width: 480px) {
+    section {
+      margin-top: 32px;
+    }
+
+    section h2 {
+      font-size: 1.35rem;
+      margin: 0 0 16px;
+      text-align: center;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    .feature h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .install {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .install ol {
+      margin: 0;
+      padding-left: 22px;
+      color: var(--text);
+    }
+
+    .install li {
+      margin-bottom: 10px;
+    }
+
+    .note {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: #1e3a8a;
+      font-size: 0.95rem;
+    }
+
+    .privacy {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 540px) {
+      .container {
+        padding: 24px 16px;
+      }
+
       .card {
-        padding: 32px 22px;
+        padding: 36px 22px;
       }
 
       h1 {
-        font-size: 1.65rem;
+        font-size: 1.8rem;
+      }
+
+      .logo {
+        width: 96px;
+        height: 96px;
       }
 
       .meta-row {
@@ -183,41 +281,103 @@
   </style>
 </head>
 <body>
-  <main class="card">
-    <div class="icon" aria-hidden="true">S</div>
-    <h1>SeatingChart</h1>
-    <p class="tagline">A lightweight, fully offline macOS app for generating random seating charts for school classes.</p>
+  <div class="container">
+    <main class="card">
+      <img class="logo" src="icon.png" alt="SeatingChart app icon" width="120" height="120">
+      <h1>SeatingChart</h1>
+      <p class="tagline">A lightweight, fully offline macOS app for generating random seating charts for school classes.</p>
 
-    <a id="downloadBtn" class="btn btn-primary" href="https://github.com/ningunoclub/SeatingChart/releases/latest">
-      <span class="spinner" id="btnSpinner" aria-hidden="true"></span>
-      <span id="btnText">Loading latest release…</span>
-    </a>
+      <a id="downloadBtn" class="btn btn-primary" href="https://github.com/ningunoclub/SeatingChart/releases/latest">
+        <span class="spinner" id="btnSpinner" aria-hidden="true"></span>
+        <span id="btnText">Loading latest release…</span>
+      </a>
 
-    <div id="meta" class="meta" style="display: none;">
-      <div class="meta-row">
-        <span class="meta-label">Version</span>
-        <span class="meta-value" id="releaseTag">—</span>
+      <div id="meta" class="meta" style="display: none;">
+        <div class="meta-row">
+          <span class="meta-label">Version</span>
+          <span class="meta-value" id="releaseTag">—</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Published</span>
+          <span class="meta-value" id="releaseDate">—</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">File</span>
+          <span class="meta-value" id="assetName">—</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Size</span>
+          <span class="meta-value" id="assetSize">—</span>
+        </div>
       </div>
-      <div class="meta-row">
-        <span class="meta-label">Published</span>
-        <span class="meta-value" id="releaseDate">—</span>
-      </div>
-      <div class="meta-row">
-        <span class="meta-label">File</span>
-        <span class="meta-value" id="assetName">—</span>
-      </div>
-      <div class="meta-row">
-        <span class="meta-label">Size</span>
-        <span class="meta-value" id="assetSize">—</span>
-      </div>
-    </div>
 
-    <div id="errorBox" class="error" style="display: none;"></div>
+      <div id="errorBox" class="error" style="display: none;"></div>
 
-    <a class="releases-link" href="https://github.com/ningunoclub/SeatingChart/releases" target="_blank" rel="noopener">
-      View all releases on GitHub →
-    </a>
-  </main>
+      <a class="releases-link" href="https://github.com/ningunoclub/SeatingChart/releases" target="_blank" rel="noopener">
+        View all releases on GitHub →
+      </a>
+    </main>
+
+    <section>
+      <h2>Features</h2>
+      <div class="features">
+        <div class="feature">
+          <h3>🪑 Smart seating</h3>
+          <p>Generate truly random charts or use constraint-aware randomized backtracking to honor your rules.</p>
+        </div>
+        <div class="feature">
+          <h3>🏫 Class management</h3>
+          <p>Add classes and students, attach photos, set gender, and keep everything organized in one place.</p>
+        </div>
+        <div class="feature">
+          <h3>📐 Visual room editor</h3>
+          <p>Click-and-drag grid canvas with blackboard orientation, quick-setup sheet, and disabled seats.</p>
+        </div>
+        <div class="feature">
+          <h3>🎲 Name picker</h3>
+          <p>Draw names without replacement and show the result in an always-on-top overlay window.</p>
+        </div>
+        <div class="feature">
+          <h3>👥 Group builder</h3>
+          <p>Split a class into balanced teams by group size or max per group, with optional gender quotas.</p>
+        </div>
+        <div class="feature">
+          <h3>📄 Export & share</h3>
+          <p>Print or save PDFs and import/export <code>.seatingchart</code> bundles with photos included.</p>
+        </div>
+        <div class="feature">
+          <h3>🖥️ Presentation mode</h3>
+          <p>Fullscreen view optimized for projectors and AirPlay displays.</p>
+        </div>
+        <div class="feature">
+          <h3>🔒 Fully offline</h3>
+          <p>No network, iCloud, or analytics traffic. All data stays on your Mac.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="install">
+      <h2>Install</h2>
+      <ol>
+        <li>Click <strong>Download latest release</strong> above to get the zip file.</li>
+        <li>Double-click the zip to extract <strong>Seating Chart.app</strong>.</li>
+        <li>Drag <strong>Seating Chart.app</strong> into your <strong>/Applications</strong> folder.</li>
+        <li>Open it from Launchpad or Finder.</li>
+      </ol>
+      <div class="note">
+        The app is ad-hoc signed, so macOS may show a Gatekeeper warning the first time you open it. If that happens, right-click the app and choose <strong>Open</strong>, or go to <strong>System Settings → Privacy & Security</strong> and click <strong>Open Anyway</strong>.
+      </div>
+    </section>
+
+    <section class="privacy">
+      <p><strong>Requirements:</strong> macOS 14.0 (Sonoma) or later. The UI is available in English and German and follows the system language automatically.</p>
+      <p>All data is stored locally in <code>~/Library/Application Support/SeatingChart/</code>. Student photos are kept in a local <code>Images/</code> folder and are never transmitted.</p>
+    </section>
+
+    <footer>
+      <p>SeatingChart is provided as-is for personal or classroom use. <a href="https://github.com/ningunoclub/SeatingChart" target="_blank" rel="noopener">Source code on GitHub</a>.</p>
+    </footer>
+  </div>
 
   <script>
     const API_URL = 'https://api.github.com/repos/ningunoclub/SeatingChart/releases/latest';
@@ -306,7 +466,6 @@
       } catch (err) {
         setReadyState('View releases', FALLBACK_URL);
         showError('Could not load the latest release automatically. Please use the button below to go to the releases page.');
-        // eslint-disable-next-line no-console
         console.error('Failed to fetch latest release:', err);
       }
     }
