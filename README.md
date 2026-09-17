@@ -15,10 +15,21 @@ The UI is available in English and German and follows the system language automa
 - **Name picker**: draw names without replacement, with an overlay window for slideshows.
 - **Group builder**: split a class into balanced teams by group size or max per group, with optional gender quotas.
 
+## Download
+
+The easiest way to install SeatingChart is from the [latest GitHub release](https://github.com/ningunoclub/SeatingChart/releases/latest):
+
+1. Download the release zip (for example `SeatingChart.zip`).
+2. Double-click the zip to extract `Seating Chart.app`.
+3. Drag `Seating Chart.app` into your `/Applications` folder.
+4. Open it from Launchpad or Finder.
+
+> The app is ad-hoc signed, so macOS may show a Gatekeeper warning the first time you open it. If that happens, right-click the app and choose **Open**, or go to **System Settings → Privacy & Security** and click **Open Anyway**.
+
 ## Requirements
 
 - macOS 14.0 (Sonoma) or later
-- Swift 6.0 / Xcode 16 or the Swift 6 command line tools
+- Swift 6.0 / Xcode 16 or the Swift 6 command line tools (only if you want to build from source)
 
 ## Build & run
 
@@ -55,15 +66,17 @@ The resulting `Seating Chart.app` is ad-hoc signed for local use.
 2. Zip the app bundle (macOS app bundles must be zipped before uploading):
 
    ```bash
-   ditto -c -k --sequesterRsrc --keepParent "Seating Chart.app" "SeatingChart-v1.0.0.zip"
+   ditto -c -k --sequesterRsrc --keepParent "Seating Chart.app" "SeatingChart.zip"
    ```
+
+   > Use the same filename (for example `SeatingChart.zip`) for every release. GitHub provides a stable `releases/latest/download/SeatingChart.zip` URL only when the asset name does not change between releases.
 
 3. Go to the repo on GitHub: `https://github.com/ningunoclub/SeatingChart/releases`
 4. Click **Draft a new release**.
 5. Click **Choose a tag**, type a version like `v1.0.0`, and select **Create new tag**.
 6. Set **Release title** (e.g., `SeatingChart 1.0.0`).
 7. Add release notes describing what’s new.
-8. Drag `SeatingChart-v1.0.0.zip` into the assets area.
+8. Drag `SeatingChart.zip` into the assets area.
 9. Click **Publish release**.
 
 Users can then download the zip, extract it, and drag `Seating Chart.app` to `/Applications`.
